@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Formulario de Compra</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1 th:text="${titulo}">Formulario de Compra</h1>
+    </header>
+
+    <section>
+        <form action="/compra" method="post">
+            <div>
+                <label for="adultos">Adultos:</label>
+                <input type="number" id="adultos" name="adultos" required min="0" value="0">
+            </div>
+            <div>
+                <label for="ninos">Niños:</label>
+                <input type="number" id="ninos" name="ninos" required min="0" value="0">
+            </div>
+            <div>
+                <label for="sillas">Sillas:</label>
+                <input type="number" id="sillas" name="sillas" required min="0" value="0">
+            </div>
+            <div>
+                <label for="mesas">Mesas:</label>
+                <input type="number" id="mesas" name="mesas" required min="0" value="0">
+            </div>
+            <div>
+                <label for="sombrillas">Sombrillas:</label>
+                <input type="number" id="sombrillas" name="sombrillas" required min="0" value="0">
+            </div>
+
+            <button type="submit">Realizar Compra</button>
+        </form>
+    </section>
+</body>
+</html>
