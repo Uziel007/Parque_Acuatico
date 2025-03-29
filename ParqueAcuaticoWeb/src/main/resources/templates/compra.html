@@ -5,64 +5,155 @@
     <title>Compras</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
         }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
+
         th, td {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 12px;
             text-align: left;
+            font-size: 1.1em;
         }
+
         th {
-            background-color: #f4f4f4;
+            background-color: #4CAF50;
+            color: #fff;
         }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .producto-checkbox {
+            transform: scale(1.2);
+        }
+
+        .cantidad {
+            width: 60px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
         .total {
-            margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1.5em;
             font-weight: bold;
-        }
-        .compra-container {
+            color: #333;
             margin-top: 20px;
+            text-align: right;
+        }
+
+        .compra-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .compra-container label {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .compra-container input {
+            font-size: 1em;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .compra-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .compra-container button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            table, .compra-container {
+                font-size: 0.9em;
+            }
+
+            .container {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Lista de Productos</h1>
+    <div class="container">
+        <h1>Lista de Productos</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Seleccionar</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="producto : ${productos}">
-                <td><input type="checkbox" class="producto-checkbox" onchange="calcularTotal()"></td>
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.descripcion}"></td>
-                <td th:text="${producto.precio}" class="precio"></td>
-                <td>
-                    <input type="number" class="cantidad" value="1" min="1" oninput="calcularTotal()" disabled>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Seleccionar</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td><input type="checkbox" class="producto-checkbox" onchange="calcularTotal()"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.precio}" class="precio"></td>
+                    <td>
+                        <input type="number" class="cantidad" value="1" min="1" oninput="calcularTotal()" disabled>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <div class="total">Total: $<span id="total">0.00</span></div>
+        <div class="total">Total: $<span id="total">0.00</span></div>
 
-    <div class="compra-container">
-        <label for="pago">Pago:</label>
-        <input type="number" id="pago" min="1" required>
-        <button onclick="realizarCompra()">Comprar</button>
+        <div class="compra-container">
+            <label for="pago">Pago:</label>
+            <input type="number" id="pago" min="1" required>
+            <button onclick="realizarCompra()">Comprar</button>
+        </div>
     </div>
 
     <script>
