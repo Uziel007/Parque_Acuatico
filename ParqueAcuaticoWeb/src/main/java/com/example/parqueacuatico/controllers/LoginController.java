@@ -27,7 +27,7 @@ public class LoginController {
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
 
         if (usuario.isPresent() && usuario.get().getPassword().equals(password)) {
-            return "redirect:/compra";
+            return "redirect:/compras";
         } else {
             model.addAttribute("error", "Credenciales incorrectas. Inténtalo de nuevo.");
             return "login";

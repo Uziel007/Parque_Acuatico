@@ -1,44 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket de Compra</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.5em;
+        }
+        .info {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .codigo-barras {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Ticket de Compra</h1>
-    </header>
 
-    <section>
-        <p><strong>Resumen de tu compra:</strong></p>
-        <table>
+    <h1>Parque Acuático Atlantis</h1>
+    <p>Dirección: Calle del Agua 123, Ciudad del Sol</p>
+    <p>Tel: 555-123-4567</p>
+    
+    <div class="info">
+        <p><strong>Fecha:</strong> <span th:text="${fecha}"></span></p>
+    </div>
+
+    <table>
+        <thead>
             <tr>
-                <td>Entradas Adulto</td>
-                <td th:text="${subtotalEntradasAdulto}"></td>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
             </tr>
-            <tr>
-                <td>Entradas Niño</td>
-                <td th:text="${subtotalEntradasNino}"></td>
+        </thead>
+        <tbody>
+            <tr th:each="detalle : ${detalles}">
+                <td th:text="${detalle.producto.nombre}"></td>
+                <td th:text="${detalle.cantidad}"></td>
+                <td th:text="${detalle.producto.precio}"></td>
+                <td th:text="${detalle.subtotal}"></td>
             </tr>
-            <tr>
-                <td>Sillas</td>
-                <td th:text="${subtotalSillas}"></td>
-            </tr>
-            <tr>
-                <td>Mesas</td>
-                <td th:text="${subtotalMesas}"></td>
-            </tr>
-            <tr>
-                <td>Sombrillas</td>
-                <td th:text="${subtotalSombrillas}"></td>
-            </tr>
-            <tr>
-                <td><strong>Total a Pagar</strong></td>
-                <td><strong th:text="${total}"></strong></td>
-            </tr>
-        </table>
-    </section>
+        </tbody>
+    </table>
+
+    <p class="total">Total: $<span th:text="${total}"></span></p>
+
+    <div class="codigo-barras">
+        <img th:src="@{'/barcode/' + ${codigoBarras}}" alt="Código de barras">
+    </div>
+
+    <p>¡Gracias por tu compra!</p>
+
 </body>
 </html>
+s

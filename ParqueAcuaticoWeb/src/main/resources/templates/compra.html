@@ -1,41 +1,105 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${titulo}">Formulario de Compra</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Compras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .total {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .compra-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 th:text="${titulo}">Formulario de Compra</h1>
-    </header>
 
-    <section>
-        <form action="/compra" method="post">
-            <div>
-                <label for="adultos">Adultos:</label>
-                <input type="number" id="adultos" name="adultos" required min="0" value="0">
-            </div>
-            <div>
-                <label for="ninos">Niños:</label>
-                <input type="number" id="ninos" name="ninos" required min="0" value="0">
-            </div>
-            <div>
-                <label for="sillas">Sillas:</label>
-                <input type="number" id="sillas" name="sillas" required min="0" value="0">
-            </div>
-            <div>
-                <label for="mesas">Mesas:</label>
-                <input type="number" id="mesas" name="mesas" required min="0" value="0">
-            </div>
-            <div>
-                <label for="sombrillas">Sombrillas:</label>
-                <input type="number" id="sombrillas" name="sombrillas" required min="0" value="0">
-            </div>
+    <h1>Lista de Productos</h1>
 
-            <button type="submit">Realizar Compra</button>
-        </form>
-    </section>
+    <table>
+        <thead>
+            <tr>
+                <th>Seleccionar</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="producto : ${productos}">
+                <td><input type="checkbox" class="producto-checkbox" onchange="calcularTotal()"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.descripcion}"></td>
+                <td th:text="${producto.precio}" class="precio"></td>
+                <td>
+                    <input type="number" class="cantidad" value="1" min="1" oninput="calcularTotal()" disabled>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="total">Total: $<span id="total">0.00</span></div>
+
+    <div class="compra-container">
+        <label for="pago">Pago:</label>
+        <input type="number" id="pago" min="1" required>
+        <button onclick="realizarCompra()">Comprar</button>
+    </div>
+
+    <script>
+        function calcularTotal() {
+            let total = 0;
+            const filas = document.querySelectorAll("tbody tr");
+
+            filas.forEach(fila => {
+                const checkbox = fila.querySelector(".producto-checkbox");
+                const precio = parseFloat(fila.querySelector(".precio").textContent);
+                const cantidadInput = fila.querySelector(".cantidad");
+
+                if (checkbox.checked) {
+                    cantidadInput.disabled = false;
+                    total += precio * parseInt(cantidadInput.value);
+                } else {
+                    cantidadInput.disabled = true;
+                    cantidadInput.value = 1; // Reiniciar cantidad cuando se deselecciona
+                }
+            });
+
+            document.getElementById("total").textContent = total.toFixed(2);
+        }
+
+        function realizarCompra() {
+            const pago = document.getElementById("pago").value;
+            const total = parseFloat(document.getElementById("total").textContent);
+            
+            if (pago < total) {
+                alert("El pago debe ser mayor o igual al total.");
+                return;
+            }
+
+            // Redirigir a ticket.html con los datos (simulación)
+            window.location.href = "/ticket?total=" + total + "&pago=" + pago;
+        }
+    </script>
+
 </body>
 </html>
