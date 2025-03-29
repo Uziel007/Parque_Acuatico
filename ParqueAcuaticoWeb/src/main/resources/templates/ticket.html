@@ -72,11 +72,10 @@
     <p class="total">Total: $<span th:text="${total}"></span></p>
 
     <div class="codigo-barras">
-        <img th:src="@{'/barcode/' + ${codigoBarras}}" alt="Código de barras">
+        <img th:src="'data:image/png;base64,' + ${codigoBarras}" alt="Código de barras">
     </div>
 
     <p>¡Gracias por tu compra!</p>
 
 </body>
 </html>
-s
