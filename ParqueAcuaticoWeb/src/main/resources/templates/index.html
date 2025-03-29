@@ -3,16 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${titulo}">Parque Acuático</title>
+    <title>Parque Acuático</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/scripts.js" defer></script>
 </head>
 <body>
+
     <header>
-        <h1 th:text="${titulo}">Parque Acuático</h1>
+        <h1>¡Bienvenido al Parque Acuático!</h1>
     </header>
 
-    <section>
-        <p>¡Disfruta de un día increíble en nuestro parque acuático con muchas atracciones y diversión!</p>
+    <!-- Carrusel de Imágenes -->
+    <section class="carousel">
+        <div class="carousel-container">
+            <img src="/images/slide1.jpg" alt="Imagen 1">
+            <img src="/images/slide2.jpg" alt="Imagen 2">
+            <img src="/images/slide3.jpg" alt="Imagen 3">
+        </div>
     </section>
+
+<!-- Secciones Intercaladas -->
+<section class="services">
+    <div class="service">
+        <img src="/images/alberca-infantil.jpg" alt="Alberca Infantil">
+        <div class="text">
+            <h2>Alberca Infantil</h2>
+            <p>Área de alberca diseñada para niños.</p>
+        </div>
+    </div>
+    <div class="service reverse">
+        <div class="text">
+            <h2>Alberca Familiar</h2>
+            <p>Alberca para toda la familia.</p>
+        </div>
+        <img src="/images/alberca-familiar.jpg" alt="Alberca Familiar">
+    </div>
+    <div class="service">
+        <img src="/images/alberca-olas.jpg" alt="Alberca de Olas">
+        <div class="text">
+            <h2>Alberca de Olas con Toboganes</h2>
+            <p>Alberca con olas artificiales y toboganes.</p>
+        </div>
+    </div>
+    <div class="service reverse">
+        <div class="text">
+            <h2>Lago Natural</h2>
+            <p>Lago natural dentro del parque.</p>
+        </div>
+        <img src="/images/lago-natural.jpg" alt="Lago Natural">
+    </div>
+    <div class="service">
+        <img src="/images/areas-camping.jpg" alt="Áreas de Camping">
+        <div class="text">
+            <h2>Áreas de Camping</h2>
+            <p>Zonas especiales para acampar.</p>
+        </div>
+    </div>
+    <div class="service reverse">
+        <div class="text">
+            <h2>Estacionamiento</h2>
+            <p>Zona de estacionamiento para visitantes.</p>
+        </div>
+        <img src="/images/estacionamiento.jpg" alt="Estacionamiento">
+    </div>
+    <div class="service">
+        <img src="/images/servicio-medico.jpg" alt="Servicio Médico">
+        <div class="text">
+            <h2>Servicio Médico</h2>
+            <p>Atención médica en caso de emergencias.</p>
+        </div>
+    </div>
+    <div class="service reverse">
+        <div class="text">
+            <h2>Regaderas</h2>
+            <p>Instalaciones de regaderas y baños.</p>
+        </div>
+        <img src="/images/regaderas.jpg" alt="Regaderas">
+    </div>
+    <div class="service">
+        <img src="/images/seguridad.jpg" alt="Seguridad 24 Hrs">
+        <div class="text">
+            <h2>Seguridad 24 Hrs</h2>
+            <p>Seguridad en todo el parque durante el día y la noche.</p>
+        </div>
+    </div>
+    <div class="service reverse">
+        <div class="text">
+            <h2>Asadores</h2>
+            <p>Áreas con asadores para uso de los visitantes.</p>
+        </div>
+        <img src="/images/asadores.jpg" alt="Asadores">
+    </div>
+    <div class="service">
+        <img src="/images/areas-verdes.jpg" alt="Áreas Verdes">
+        <div class="text">
+            <h2>Áreas Verdes</h2>
+            <p>Espacios naturales con árboles y césped.</p>
+        </div>
+    </div>
+</section>
+
+
 </body>
 </html>

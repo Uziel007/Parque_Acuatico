@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String mostrarPaginaInicio(Model model) {
-        model.addAttribute("titulo", "Bienvenidos al Parque Acuático");
-        return "index"; // Retorna la vista index.html
+    public String home(Model model) {
+        return "index";  // Renderiza la plantilla index.html
     }
 }
